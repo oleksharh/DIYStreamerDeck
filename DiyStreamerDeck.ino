@@ -118,6 +118,10 @@ void setup()
   tft.setTextSize(2);
   tft.setCursor(10, 10);
   tft.println("Connecting...");
+  tft.println(tft.getViewportHeight());
+  tft.setCursor(10, 100);
+  tft.println(tft.getViewportWidth());
+  delay(10000);
 
   WiFi.mode(WIFI_STA);
   WiFi.begin(WIFI_SSID, WIFI_PASS);
