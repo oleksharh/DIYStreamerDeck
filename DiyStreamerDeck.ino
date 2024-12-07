@@ -113,8 +113,8 @@ void setup()
   tft.begin();
   tft.setRotation(3);
   tft.fillScreen(TFT_BLACK);
-  tft.setTextColor(TFT_WHITE);
-  tft.fillScreen(TFT_BLACK);
+  tft.setTextColor(TFT_WHITE, TFT_BLACK); // Text color and background
+  // tft.fillScreen(TFT_BLACK);
   tft.setTextSize(2);
   tft.setCursor(10, 10);
   tft.println("Connecting...");
@@ -127,7 +127,8 @@ void setup()
   }
   Serial.print("Connected to WiFi! IP: ");
   Serial.println(WiFi.localIP());
-  tft.fillScreen(TFT_BLACK);
+  // tft.fillScreen(TFT_BLACK);
+
   tft.setTextSize(2);
   tft.setCursor(10, 10);
   tft.println("Connected to WiFi!");
@@ -158,9 +159,16 @@ void updateSpotifyData(CurrentlyPlaying _currentlyPlaying) {
   currentlyPlaying = _currentlyPlaying;
 }
 
+long prevprogress = 0;
+
 void printCurrentlyPlayingToDisplay() {
   Serial.println("--------- Currently Playing ---------");
-  tft.fillScreen(TFT_BLACK);
+  // tft.fillScreen(TFT_BLACK);
+
+  if (prevprogress == 0)
+  {
+    tft.fillScreen(TFT_BLACK);
+  }
 
   // Print TRACK name
   String trackName = String(currentlyPlaying.trackName);
@@ -201,6 +209,15 @@ void printCurrentlyPlayingToDisplay() {
   long progress = currentlyPlaying.progressMs;
   long duration = currentlyPlaying.durationMs;
   int progress_pixel = map(progress, 0, duration, 0, 126);
+
+  if (prevprogress < progress)
+    {
+      prevprogress = progress;
+    } else
+    {
+      prevprogress = progress;
+      tft.fillScreen(TFT_BLACK);
+    }
 
   tft.drawRect(0, 50, 128, 6, TFT_WHITE);
   tft.fillRect(0, 50, progress_pixel, 6, TFT_WHITE);
@@ -266,7 +283,7 @@ void replaceSpecialCharacters(String &str) {
 
 void printLocalTime() {
   // Format and print current time
-  tft.fillScreen(TFT_BLACK);
+  // tft.fillScreen(TFT_BLACK);
   tft.setCursor(20, 5);
   tft.setTextSize(3);
   tft.print(timezone.dateTime("H:i"));
