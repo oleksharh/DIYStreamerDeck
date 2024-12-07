@@ -17,6 +17,9 @@
 #define TFT_D6   13
 #define TFT_D7   12
 
+#define TFT_WIDTH 480
+#define TFT_HEIGHT 320
+
 #define SERIAL_BAUDRATE 115200
 
 // Test configuratuions (if you happen to read it,
@@ -28,7 +31,7 @@
 
 // Spotify configuration
 #define SPOTIFY_MARKET     "GB"      // 2-letter country code https://www.iban.com/country-codes
-#define SPOTIFY_API_DELAY  1 * 1000  // 1 second delay between API calls
+#define SPOTIFY_API_DELAY  1 * 600  // 1 second delay between API calls
 
 // Time and weather configuration
 #define TIME_ZONE          "Europe/London"  // Timezone code https://timezonedb.com/time-zones
@@ -36,8 +39,8 @@
 #define WEATHER_API_DELAY  5 * 60 * 1000    // 5 minutes delay between API calls
 
 // Display configuration
-#define MAX_CHAR_TITLE_PER_LINE  11
-#define MAX_CHAR_ARTIST_PER_LINE 21
+#define MAX_CHAR_TITLE_PER_LINE  22 // with size 3 of the font
+#define MAX_CHAR_ARTIST_PER_LINE 35
 
 
 #endif 
